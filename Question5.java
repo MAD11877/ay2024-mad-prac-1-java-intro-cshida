@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Question5
 {
   public static void main(String[] args)
@@ -27,6 +27,37 @@ public class Question5
      */
      
     Scanner in = new Scanner(System.in);
-    
+    ArrayList<Integer> numlist = new ArrayList<>();
+    //System.out.print("Enter number of digits: ");
+    int num = in.nextInt();
+    for (int j = 0; j < num; j++) {
+        //System.out.print("> ");
+        int digit = in.nextInt();
+        numlist.add(digit);
+    }
+    int mode = numlist.get(0);
+    int previous = 1;
+    int count = 1;
+    for (int i = 1; i < num; i++) {
+        if (numlist.get(i).equals(numlist.get(i - 1))) 
+        {
+            count++;
+        } 
+        else 
+        {
+            if (count> previous) 
+            {
+                previous = count;
+                mode = numlist.get(i - 1);
+            }
+            count = 1;
+        }
+    }
+    if (count > previous) 
+    {
+        mode = numlist.get(num - 1);
+    }
+    System.out.println(mode);
+    in.close();    
   }
 }
