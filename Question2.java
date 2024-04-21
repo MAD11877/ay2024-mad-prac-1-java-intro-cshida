@@ -16,7 +16,7 @@ public class Question2
     System.out.print("Enter your weight in kilograms: ");
     double weight = in.nextDouble();
     double bmi = weight / (height * height);
-    System.out.println("Your BMI is " + "%.1f", bmi);
-    in.close();
+    String formattedBmi = String.format("%.1f", bmi);
+    System.out.println(formattedBmi);    in.close();
   }
 }
