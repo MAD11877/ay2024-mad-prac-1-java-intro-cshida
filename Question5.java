@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 public class Question5
 {
   public static void main(String[] args)
@@ -26,32 +27,47 @@ public class Question5
      * Hint: Use a loop to get input. Use another 2 loops to find the mode
      */
      
-      Scanner in = new Scanner(System.in);
-      int times = in.nextInt();
-      List<Integer> list = new ArrayList<Integer>();
-      Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    Scanner in = new Scanner(System.in);
 
-      for (int i = 0; i < times; i++) {
-          int number = in.nextInt();
-          list.add(number);
-          if (map.containsKey(number)) {
-              int value = map.get(number);
-              map.put(number, value + 1);
-          } else {
-              map.put(number, 1);
-          }
-      }
+    ArrayList<Integer> data = new ArrayList<>();
 
-      int maxCount = 0;
-      int mode = 0;
-      for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-          int count = entry.getValue();
-          if (count > maxCount) {
-              maxCount = count;
-              mode = entry.getKey();
-          }
-      }
+    int length = in.nextInt();
 
-      System.out.println(mode);  
-  }
+    for (int i=0; i<length; i++)
+    {
+      int number = in.nextInt();
+      data.add(number);
+    }
+
+        // Sorting the ArrayList
+        Collections.sort(data);
+
+        // Finding the mode (number with the highest occurrence)
+        int mode = data.get(0);
+        int previous = 1;
+        int count = 1;
+        for (int i = 1; i < data.size(); i++) {
+            if (data.get(i).equals(data.get(i - 1))) 
+            {
+                count++;
+            } 
+            else 
+            {
+                if (count> previous) 
+                {
+                    previous = count;
+                    mode = data.get(i - 1);
+                }
+                count = 1;
+            }
+        }
+
+        // Check for the mode in case it is the last element in the list
+        if (count > previous) 
+        {
+            mode = data.get(data.size() - 1);
+        }
+
+        System.out.println( mode);
+    }
 }
