@@ -26,38 +26,32 @@ public class Question5
      * Hint: Use a loop to get input. Use another 2 loops to find the mode
      */
      
-    Scanner in = new Scanner(System.in);
-    ArrayList<Integer> numlist = new ArrayList<>();
-    //System.out.print("Enter number of digits: ");
-    int num = in.nextInt();
-    for (int j = 0; j < num; j++) {
-        //System.out.print("> ");
-        int digit = in.nextInt();
-        numlist.add(digit);
-    }
-    int mode = numlist.get(0);
-    int previous = 1;
-    int count = 1;
-    for (int i = 1; i < num; i++) {
-        if (numlist.get(i).equals(numlist.get(i - 1))) 
-        {
-            count++;
-        } 
-        else 
-        {
-            if (count> previous) 
-            {
-                previous = count;
-                mode = numlist.get(i - 1);
-            }
-            count = 1;
-        }
-    }
-    if (count > previous) 
-    {
-        mode = numlist.get(num - 1);
-    }
-    System.out.println(mode);
-    in.close();    
+      Scanner in = new Scanner(System.in);
+      int times = in.nextInt();
+      List<Integer> list = new ArrayList<Integer>();
+      Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+      for (int i = 0; i < times; i++) {
+          int number = in.nextInt();
+          list.add(number);
+          if (map.containsKey(number)) {
+              int value = map.get(number);
+              map.put(number, value + 1);
+          } else {
+              map.put(number, 1);
+          }
+      }
+
+      int maxCount = 0;
+      int mode = 0;
+      for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+          int count = entry.getValue();
+          if (count > maxCount) {
+              maxCount = count;
+              mode = entry.getKey();
+          }
+      }
+
+      System.out.println(mode);  
   }
 }
